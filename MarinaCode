@@ -8,7 +8,7 @@
 
    <script >
 
-  var paginacao = 0;
+	var paginacao = 0;
    	var ourJSON;
    	var BROWSERWIDTH = 480;
    	var curwidth;
@@ -122,42 +122,22 @@
 
 
 		 $(document).on('click', '#link', function(){
-		 	if($(window).)
-	        $('.'+$(this).attr('test')).slideToggle();
-	       	$(".menu_item_tweet",this).toggleClass('menu_item_tweet1 menu_item_tweet2');
-	        $(this).children().removeClass('ui-icon-plus').addClass('ui-icon-minus');
-	        $('ul').listview('refresh');
-        
+		 	if($(window).width()<= BROWSERWIDTH){
+		        $('.'+$(this).attr('test')).slideToggle();
+		       	$(".menu_item_tweet",this).toggleClass('menu_item_tweet1 menu_item_tweet2');
+		        $(this).children().removeClass('ui-icon-plus').addClass('ui-icon-minus');
+		        $('ul').listview('refresh');
+        	}
      	 });
 
 
-     	 function replotSmall(data){
-
-     	 	$('#teste2').empty();
-     	 	output = "";
-     	 	$("#infoTweet").remove();
-     	 	for(i=0; i < paginacao; i++){
-
-     	 			output = output + '<li id="infoTweet" data-theme="a" class="class'+i+'" style="display:none;">';
-					output = output + '<h4>User info</h4>';
-					output = output + '<p class = "profileText menu_item_tweet1">'+data[i].user.description +'</p>';
-					output = output + '<p class = "location"> ' + data[i].user.location + '</p>';
-					output = output + '<table> <tr> <th class= "table_numbers">'+ data[i].user.statuses_count + '</th> <th class= "table_numbers">' + data[i].user.friends_count +  '</th> <th class= "table_numbers"> ' + data[i].user.followers_count + ' </th> </tr> <tr>';
-					output = output + '<td>TWEETS</td> <td>FOLLOWING</td> <td> FOLLOWERS </td> </tr> </table>';
-					output = output + '</li>';
-
-     	 	}
-     	 	$("ul").append(output);
-     	 	$('ul').listview('refresh');
-
-     	 }
 
      	 $(window).on('resize', function(){
      	 	if($(window).width()<= BROWSERWIDTH && curwidth > BROWSERWIDTH){
-     	 		replotSmall(ourJSON);
+     	 		window.location = window.location.pathname;
      	 	}
-     	 	if($(window).width() < BROWSERWIDTH && curwidth >= BROWSERWIDTH){
-     	 		replotBig();
+     	 	if($(window).width() > BROWSERWIDTH && curwidth <= BROWSERWIDTH){
+     	 		window.location = window.location.pathname;
      	 	}
      	 });
 		
@@ -310,6 +290,10 @@
 		    font-weight: 700;
 		    text-align: right;
 			 
+		}
+
+		.hiding{
+			display:none;
 		}
 		
    </style>
